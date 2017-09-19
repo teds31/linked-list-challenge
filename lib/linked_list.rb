@@ -10,8 +10,8 @@ class LinkedList
     node = @head
 
     while !node.nil?
-      yield(node.data)
-      node = node.next
+      yield(node)
+      node = node.next_node
     end
   end
 
@@ -19,7 +19,7 @@ class LinkedList
     @head = Node.new(value, @head)
   end
 
-  def insert(index, value)
+  def beginning_insert(index, value)
     i = index
     if index === 0
       prepend(value)
@@ -28,6 +28,23 @@ class LinkedList
         i -= 1
       end
       prepend(value)
+    end
+  end
+
+  def insert(index, value)
+
+    if index == 0
+      self.prepend(value)
+    else
+
+      prev_node = @head
+      (index - 1).times do
+        prev_node = prev_node.next_node
+      end
+
+      following_node = prev_node.next_node
+      new_node = Node.new(value, following_node)
+      prev_node.next_node = new_node
     end
   end
 
