@@ -54,7 +54,18 @@ class LinkedList
  end
 
  def to_s
-   
+
+   array = []
+   node = @head
+
+   while !node.nil?
+     array << node.info
+     node = node.next_node
+   end
+
+   values = array.join(', ') || ""
+
+   return "LinkedList(#{values})"
  end
 
   class Node
